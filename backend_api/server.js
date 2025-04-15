@@ -11,16 +11,7 @@ app.listen(PORT, () => {
 })
 
 
-// 👉🏻 ROUTES
-
-app.get('/', (req, res) => {
-  res.send('Welcome to the Movies API Server!')
-})
-
-
 // 👉🏻 Middlewares
-
-app.use('/api/v1/movies', moviesRouter)
 
 //Cors Middleware
 app.use(cors(
@@ -28,15 +19,23 @@ app.use(cors(
     origin: process.env.FRONT_URL || 'http://localhost:5173'
   }
 ))
-
 // Body Parser Middleware
 app.use(express.json())
 
 // Static Assets Middleware
 app.use(express.static('public'))
 
+
+app.use('/api/v1/movies', moviesRouter)
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Movies API Server!')
+})
+// 👉🏻 ROUTES
+
 // Server Error Handler Middleware
 app.use(serverError)
 
 // Client Error Handler Middleware
 app.use(notFound)
+
