@@ -17,9 +17,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Movies API Server!')
 })
 
-app.use('/api/v1/movies', moviesRouter)
 
 // 👉🏻 Middlewares
+
+app.use('/api/v1/movies', moviesRouter)
 
 //Cors Middleware
 app.use(cors(
