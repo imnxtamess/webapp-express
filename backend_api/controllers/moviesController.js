@@ -3,7 +3,12 @@ const connection = require('../database/movie_db')
 // index route for movies
 
 function index(req, res) {
-  res.send('This is the movie list')
+  const sql = 'SELECT * FROM movies'
+
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message })
+    res.json(results)
+  })
 }
 
 // show route for a single movie
