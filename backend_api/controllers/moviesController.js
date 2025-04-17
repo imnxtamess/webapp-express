@@ -31,8 +31,22 @@ function show(req, res) {
   })
 }
 
+// post route to create a review for a movie
+
+function post(req, res) {
+  const { movie_id, name, vote, text, created_at, updated_at } = req.body
+
+  const values = [movie_id, name, vote, text, created_at, updated_at]
+  const sql = 'INSERT INTO reviews (movie_id,name,vote,text) VALUES (?,?,?,?)'
+  connection.query(sql, values, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message })
+    res.json({ message: 'Review posted successfully!' })
+  })
+}
+
 
 module.exports = {
   index,
-  show
+  show,
+  post
 }
